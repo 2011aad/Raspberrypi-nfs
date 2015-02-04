@@ -1,0 +1,41 @@
+NFS means network file system
+
+1.install nfs and rpcbind program
+
+#apt-get install nfs-kernal-server
+#apt-get install rpcbind
+
+2.configure your nfs
+
+#vim /etc/exports
+
+add following command:
+
+/home/pi	*(rw,sync,no_subtree_check)
+
+------/home/pi is the directory you want to open to others------
+------* means any system can mount this directory, you can also use IP address such as 192.168.1.117 to allow specific computer------
+------the parameters in () are permissions------
+
+3.start rpcbind and nfs service
+
+#service rpcbind start
+#/etc/init.d/nfs-kernal-server restart
+
+Now, nfs server runs in your raspberry pi system!
+
+Turn to your windows PC! 
+
+(before the following steps, make sure nfs is started on your PC)
+
+4.check the shared directory on raspberry pi
+
+#showmount -e 192.168.1.117
+
+5.mount the directory
+
+#mount \\192.168.1.117\home\pi H:
+
+------H: means the mount address------
+
+Then, if you open your windows explorer, you will see H: disk which is the file system on your raspberry pi!
